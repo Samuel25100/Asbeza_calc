@@ -1,0 +1,15 @@
+#root {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+div {
+    display: inline-block;
+}
+
+
+body {
+    margin: 0%;
+}

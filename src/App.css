@@ -1,0 +1,243 @@
+/*Body CSS*/
+
+
+
+.logo, .logoIcon {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.logo h1 {
+  font-size: 50px;
+  font-style: italic;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  color: rgb(70, 67, 67);
+}
+
+.logo div {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  margin-top: 7%;
+  align-items: center;
+}
+
+.logoIcon {
+  width: 100%;
+  height: 100%;
+}
+
+.sec {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  height: 150px;
+  flex-wrap: wrap;
+  border: 1px solid rgb(221, 221, 221);
+  width: 60%;
+  height: 50%;
+  overflow-y: scroll;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-start;
+  align-items:flex-start;
+}
+
+.clcbar {
+  width: 500px;
+  height: 45px;
+  border: 3px gray solid;
+  border-radius: 3px;
+  margin-left: 45px;
+}
+
+.calButton button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: aliceblue;
+  background-color: #1d3849;
+  height: 45px;
+  width: 80px;
+  border: 3px gray solid;
+  border-radius: 3px;
+}
+
+.calButton {
+  margin-left: 15px;
+}
+
+.monthYear {
+  height: 45px;
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.monthYear select {
+  font-size: 20px;
+  border: 2px gray solid;
+  height: 99.9%;
+  width: 100px;
+  margin: 0%;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  align-items: center;
+  background-color: rgb(250, 250, 250);
+}
+.monthYear .monInput {
+  height: 15px;
+  margin: 0%;
+  width: 25px;
+  margin-left: 5px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.monthYear:hover > .yearly {
+  display: flex;
+  z-index: 1;
+}
+
+.monthYear .yearly {
+  display: none;
+}
+
+div.body {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px rgb(208, 208, 208) solid;
+}
+
+div.items {
+  margin: 10px;
+  border: 2px solid;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: rgb(235, 235, 235);
+  border-radius: 5px;
+}
+div.description {
+  display: flex;
+  margin: 0%;
+  align-items: center;
+  justify-content: center;
+}
+
+.item_name {
+  margin: 0%;
+  font-size: 10px;
+  margin-left: 5px;
+  margin-right: 4px;  
+}
+.price {
+  margin: 0;
+  font-size: 10px;
+}
+
+.items .images {
+  width: 100%;
+  height: 60%;
+}
+
+.itemImage {
+  width: 100%;
+  height: 100%;
+}
+
+/*Left Bar CSS*/
+
+.leftBar {
+  width: 9%;
+  border-right: 2px solid;
+  margin: 0%;  
+  background-color: rgb(246, 246, 246);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding-right: 1px;
+
+}
+
+.leftBar div{
+  margin: 0%;
+  margin-left: 5px;
+}
+
+.leftmenu {
+  width: 55px;
+  height: 55px;
+}
+
+.leftmenu .leftmenuIcon {
+  width: 55px;
+  height: 55px;
+}
+
+.grocery {
+  width: 55px;
+  height: 55px;
+}
+
+.grocery .groceryIcon {
+  width: 55px;
+  height: 55px;
+}
+
+.house {
+  width: 55px;
+  height: 55px;
+}
+
+.house .houseIcon {
+  width: 55px;
+  height: 55px;
+}
+
+.vehicle {
+  width: 55px;
+  height: 55px;
+}
+
+.vehicle .vehicleIcon {
+  width: 55px;
+  height: 55px;
+}
+
+.hotel {
+  width: 55px;
+  height: 55px;
+}
+
+.hotel .hotelIcon {
+  width: 55px;
+  height: 55px;
+}
+
+.tools {
+  width: 55px;
+  height: 55px;
+}
+
+.tools .toolIcon {
+  width: 53px;
+  height: 53px;
+}
+
+.one{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}

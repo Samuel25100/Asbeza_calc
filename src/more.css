@@ -1,0 +1,23 @@
+.items:active {
+    opacity: 0.5;
+    border: 2px gray solid;
+}
+
+.items:hover {
+    opacity: 0.8;
+}
+
+.calButton:hover {
+    opacity: 0.8;
+}
+
+.leftBar .grocery:hover,
+.leftBar .house:hover,
+.leftBar .vehicle:hover,
+.leftBar .hotel:hover,
+.leftBar .tools:hover {
+    opacity: 0.5;
+    border-radius: 25%;
+    background-color: rgb(211, 214, 216);
+}
+
