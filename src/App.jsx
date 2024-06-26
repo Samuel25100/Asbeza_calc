@@ -3,6 +3,7 @@ import './App.css'
 import './more.css'
 //import add from './click.jsx'
 
+
 const data = [
 	{ "name": "Onion", "price": 30, "imageid": "src/assets/onion.png" },
 	{ "name": "Carrot", "price": 35, "imageid": "src/assets/carrot.png" },
@@ -29,6 +30,72 @@ const data = [
 ];
 
 export default function App() {
+	const [calIn, setCalIn] = useState([]);
+	const [final, setFinal] = useState("");
+	const [result, setresult] = useState(0);
+
+	function updatein(name, price) {
+		setCalIn((prevCalin) => {
+			const newCalIn = [...prevCalin];
+			function containobj(array, obj) {
+				for (let line of array) {
+					if (line[name] === obj.name) {
+						return (0);
+					}
+				}
+				return (1);
+			}
+
+			if (containobj(newCalIn, {name: name, price: price})) {
+				newCalIn.push({name: name, price: price});
+			}
+			let newFinal = "";
+			for (let val of newCalIn) {
+				if (newFinal !== "") {
+					newFinal += " + ";
+				}
+				newFinal += `(${val.name}: ${val.price})`;
+			}
+			setFinal(newFinal);
+			return (newCalIn);
+		})
+	}
+
+	function clear() {
+		setCalIn([]);
+		setFinal("");
+		setresult(0);
+	}
+
+	function del() {
+		if (calIn.length !== 0 && final.length !== 0) {
+			setCalIn((prevVal) => {
+				if (prevVal.length !== 0) {
+					if (prevVal.length === 1) {
+						clear();
+					}
+					prevVal.pop();
+					return (prevVal);
+				}
+			})
+			setFinal((perfinal) => {
+				if (perfinal.length !== 0) {
+					if (perfinal.length <= 20) {
+						clear();
+					}
+					return (perfinal.replace(/\s\+\s\([^)]+\)$/, ""));
+				}
+			})
+		}
+	}
+
+	function calculate() {
+		let relt = 0;
+		for (let line of calIn) {
+			relt += line.price;
+		}
+		setresult(relt);
+	}
 
 	return (
 		<>
@@ -43,32 +110,38 @@ export default function App() {
 							<img className='logoIcon' src='src/assets/cart.png' alt='Cart' />
 						</div>
 					</div>
-					<Calcbar />
-					<div className='sec'>
-						{data.map((items, i) => (
-							<div className="items" key={i}>
-								<div className='images'>
-									<img className='itemImage' src={items.imageid} alt={items.name}
-									/>
-
-								</div>
-								<div className="description">
-									<h2 className="item_name">{items.name}</h2>
-									<h2 className="price">${items.price}</h2>
-								</div>
-							</div>
-						))}
-
+					<Calcbar final = {final} clear = {clear} del={del} calculate={calculate}/>
+					<div className='popup' style={{ display: result === 0 ? 'none' : 'block' }}>
+						<h2>Result:${result}</h2>
 					</div>
-
+					<ItemSec updatein = {updatein} />
 				</div>
 			</div>
 		</>
 	);
 }
 
-function Calcbar() {
+function ItemSec({ updatein }) {
+	return (
+		<div className='sec'>
+			{data.map((items, i) => (
+				<div className="items" key={i} onClick={() => {
+					updatein(items.name, items.price);
+					}}>
+					<div className='images'>
+						<img className='itemImage' src={items.imageid} alt={items.name}/>
+					</div>
+					<div className="description">
+						<h2 className="item_name">{items.name}</h2>
+						<h2 className="price">${items.price}</h2>
+					</div>
+				</div>
+			))}
+		</div>
+	);
+}
 
+function Calcbar({ final, clear, del, calculate }) {
 	return (
 		<section className='top'>
 			<div className="clcbar">
@@ -80,13 +153,22 @@ function Calcbar() {
 						<option value="yearly">
 							Yearly
 						</option>
-					</select>
-					
+					</select>	
 				</div>
-
+				<div className='inputval'>
+					{final}
+				</div>
 			</div>
 			<div className='calButton'>
-				<button>Calculate</button>
+				<button className='delete' onClick={() => {
+					del();
+				}}>Delete</button>
+				<button className='clear' onClick={() => {
+					clear();
+				}}>Clear</button>
+				<button className='cal' onClick={() => {
+					calculate();
+				}}>Calculate</button>
 			</div>
 		</section>
 	)

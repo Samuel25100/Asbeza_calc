@@ -7,9 +7,18 @@
     opacity: 0.8;
 }
 
-.calButton:hover {
+.calButton .delete:hover {
     opacity: 0.8;
 }
+
+.calButton .clear:hover {
+    opacity: 0.8;
+}
+
+.calButton .cal:hover {
+    opacity: 0.8;
+}
+
 
 .leftBar .grocery:hover,
 .leftBar .house:hover,

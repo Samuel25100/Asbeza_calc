@@ -42,6 +42,8 @@
   overflow-y: scroll;
 }
 
+/*Calculator Bar*/
+
 .top {
   display: flex;
   justify-content: flex-start;
@@ -54,6 +56,14 @@
   border: 3px gray solid;
   border-radius: 3px;
   margin-left: 45px;
+  display: flex;
+  flex-direction: row;
+}
+
+.calButton {
+  gap: 2px;
+  display: flex;
+  flex-direction: row;
 }
 
 .calButton button {
@@ -110,6 +120,20 @@
   display: none;
 }
 
+.inputval {
+  border: 2px red solid;
+  width: 100%;
+  height: 97%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+div.popup {
+  display: none;
+}
+
+/* List of Items */
 div.body {
   display: flex;
   width: 100%;
