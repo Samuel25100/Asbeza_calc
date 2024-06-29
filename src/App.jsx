@@ -3,7 +3,6 @@ import './App.css'
 import './more.css'
 //import add from './click.jsx'
 
-
 const data = [
 	{ "name": "Onion", "price": 30, "imageid": "src/assets/onion.png" },
 	{ "name": "Carrot", "price": 35, "imageid": "src/assets/carrot.png" },
@@ -24,15 +23,15 @@ const data = [
 	{ "name": "Coffee", "price": 50, "imageid": "src/assets/coffee.png" },
 	{ "name": "Bread", "price": 50, "imageid": "src/assets/bread.png" },
 	{ "name": "Cucumber", "price": 50, "imageid": "src/assets/Cucumber.png" },
-	{ "name": "Pasta", "Orange": 50, "imageid": "src/assets/orange.png" },
+	{ "name": "Pasta", "price": 50, "imageid": "src/assets/orange.png" },
 	{ "name": "Mango", "price": 50, "imageid": "src/assets/mango.png" },
 	{ "name": "Avocado", "price": 50, "imageid": "src/assets/avocado.png" },
 ];
-
 export default function App() {
 	const [calIn, setCalIn] = useState([]);
 	const [final, setFinal] = useState("");
 	const [result, setresult] = useState(0);
+	const [dataget, setdataget] = useState(data);
 
 	function updatein(name, price) {
 		setCalIn((prevCalin) => {
@@ -54,7 +53,7 @@ export default function App() {
 				if (newFinal !== "") {
 					newFinal += " + ";
 				}
-				newFinal += `(${val.name}: ${val.price})`;
+				newFinal += `(${val.name}: \$${val.price})`;
 			}
 			setFinal(newFinal);
 			return (newCalIn);
@@ -97,11 +96,25 @@ export default function App() {
 		setresult(relt);
 	}
 
+	async function fetcher(type) {
+		const url = `http://127.0.0.1:5000/api/cal/${type}`;
+		
+		try {
+            const response = await fetch(url);
+			if (response.ok) {
+				const data = await response.json();
+            	setdataget(data);
+			}
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+	}
+
 	return (
 		<>
 			<div className='body'>
 				<div className='leftBar'>
-					<LeftBar />
+					<LeftBar fetcher={fetcher}/>
 				</div>
 				<div className="one">
 					<div className='logo'>
@@ -114,17 +127,17 @@ export default function App() {
 					<div className='popup' style={{ display: result === 0 ? 'none' : 'block' }}>
 						<h2>Result:${result}</h2>
 					</div>
-					<ItemSec updatein = {updatein} />
+					<ItemSec updatein = {updatein} dataget = {dataget} />
 				</div>
 			</div>
 		</>
 	);
 }
 
-function ItemSec({ updatein }) {
+function ItemSec({ updatein, dataget }) {
 	return (
 		<div className='sec'>
-			{data.map((items, i) => (
+			{dataget.map((items, i) => (
 				<div className="items" key={i} onClick={() => {
 					updatein(items.name, items.price);
 					}}>
@@ -174,28 +187,38 @@ function Calcbar({ final, clear, del, calculate }) {
 	)
 }
 
-function LeftBar() {
+function LeftBar({fetcher}) {
 	return (
 		<>
 			<div className='leftmenu'>
 				<img className='leftmenuIcon' src='src/assets/leftMenu.png' alt='ICON' />
 			</div>
-			<div className='grocery'>
+			<div className='grocery' onClick={() => {
+				fetcher('grocery');
+			}}>
 				<img className='groceryIcon' src='src/assets/grocery.png' alt='ICON' />
 
 			</div>
-			<div className='house'>
+			<div className='house' onClick={() => {
+				fetcher('houses')
+			}}>
 				<img className='houseIcon' src='src/assets/house.png' alt='ICON' />
 
 			</div>
-			<div className='vehicle'>
+			<div className='vehicle' onClick={() => {
+				fetcher('vehicles')
+			}}>
 				<img className='vehicleIcon' src='src/assets/vehicle.png' alt='ICON' />
 			</div>
-			<div className='hotel'>
+			<div className='hotel' onClick={() => {
+				fetcher('hotels')
+			}}>
 				<img className='hotelIcon' src='src/assets/hotel.png' alt='ICON' />
 
 			</div>
-			<div className='tools'>
+			<div className='tools' onClick={() => {
+				fetcher('tools')
+			}}>
 				<img className='toolIcon' src='src/assets/tools.png' alt='ICON' />
 
 			</div>
