@@ -30,3 +30,6 @@
     background-color: rgb(211, 214, 216);
 }
 
+.logo:hover {
+    opacity: 0.5;
+}

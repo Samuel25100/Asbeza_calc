@@ -1,0 +1,48 @@
+.LandingBody {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.Image {
+    width: 70%;
+    height: 736px;
+  
+}
+
+.topLanding {
+    width: 100%;
+    height: 100%;
+}
+
+.describe {
+    width: 50%;
+    height: 100%;
+    
+}
+
+.topFont {
+    font-size: 60px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+}
+
+.LandingDescri {
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.getSt {
+    font-size: 30px;
+    background-color: rgb(98, 34, 34);
+    font-weight: 100;
+    color: rgb(254, 254, 254);
+    border-radius: 3%;
+    margin-top: 4%;
+    margin-left: 30%;
+}
+
+.getSt:hover {
+    background-color: rgb(100, 40, 40);
+    opacity: 0.6;
+}

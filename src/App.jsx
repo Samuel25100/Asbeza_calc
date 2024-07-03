@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css'
 import './more.css'
+import './landingPg.css'
 //import add from './click.jsx'
 
 const data = [
@@ -35,6 +36,7 @@ export default function App() {
 	const [itemSize, setItemSize] = useState({});
 	const [timeline, setTimeSize] = useState("");
 	const [month, setMonth] = useState(0);
+	const [landingPage, setLanding] = useState(true);
 
 
 	function updatein(name, price) {
@@ -166,29 +168,51 @@ export default function App() {
 			);
 		}
 	}
+	if (landingPage) {
+		return (
+			<div className='LandingBody'>
+				<div className='Image'>
+					<img className='topLanding' src='src/assets/LandingPage/TopLandingPage.png' alt='Top-Landing-Page'/>
+				</div>
+				<div className='describe'>
+					<h1 className='topFont'>AsbezaCalc</h1>
+					<p className='LandingDescri'>Welcome to AsbezaCalc – your go-to web app for effortlessly calculating the cost of living in Addis Ababa, Ethiopia! Whether you’re a tourist planning your next adventure or someone considering settling in this vibrant city, our app is designed to provide you with accurate and detailed expense estimates.
 
-	return (
-		<>
-			<div className='body'>
-				<div className='leftBar'>
-					<LeftBar fetcher={fetcher}/>
+With AsbezaCalc, you can easily calculate the costs for essential categories such as groceries, hotels, housing, and vehicle rentals. <br/> Our app also covers tools and tech products, ensuring you have a comprehensive understanding of the expenses you might encounter.
+
+Navigate through our user-friendly interface to input your preferences and requirements, and receive tailored estimates that help you budget effectively.
+Let AsbezaCalc be your trusted companion in making informed financial decisions in one of Africa’s most dynamic cities. Start planning today and embrace the beauty and opportunities that Addis Ababa has to offer!</p>
+					<button className='getSt' onClick={() => (
+						setLanding(false)
+						)}>Get Started</button>
 				</div>
-				<div className="one">
-					<div className='logo'>
-						<h1>Asbeza</h1>
-						<div className='logoIcon'>
-							<img className='logoIcon' src='src/assets/cart.png' alt='Cart' />
-						</div>
-					</div>
-					<Calcbar final = {final} clear = {clear} del={del} calculate={calculate} timeline={timeline} setTimeSize={setTimeSize}  month={month}setMonth={setMonth}/>
-					<div className='popup' style={{ display: result === 0 ? 'none' : 'block' }}>
-						<h2>Result:${result}</h2>
-					</div>
-					<ItemSec updatein = {updatein} dataget = {dataget}  datatype = {datatype} HandleInput = {HandleInput}/>
-				</div>
+				
 			</div>
-		</>
-	);
+		)
+	} else {
+		return (
+			<>
+				<div className='body'>
+					<div className='leftBar'>
+						<LeftBar fetcher={fetcher}/>
+					</div>
+					<div className="one">
+						<div className='logo' onClick={() => (setLanding(true))}>
+							<h1>Asbeza</h1>
+							<div className='logoIcon'>
+								<img className='logoIcon' src='src/assets/cart.png' alt='Cart' />
+							</div>
+						</div>
+						<Calcbar final = {final} clear = {clear} del={del} calculate={calculate} timeline={timeline} setTimeSize={setTimeSize}  month={month}setMonth={setMonth}/>
+						<div className='popup' style={{ display: result === 0 ? 'none' : 'block' }}>
+							<h2>Result:${result}</h2>
+						</div>
+						<ItemSec updatein = {updatein} dataget = {dataget}  datatype = {datatype} HandleInput = {HandleInput}/>
+					</div>
+				</div>
+			</>
+		);
+	}
 }
 
 function ItemSec({ updatein, dataget, HandleInput, datatype }) {
