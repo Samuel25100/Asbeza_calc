@@ -4,41 +4,45 @@ import './more.css'
 //import add from './click.jsx'
 
 const data = [
-	{ "name": "Onion", "price": 30, "imageid": "src/assets/onion.png" },
-	{ "name": "Carrot", "price": 35, "imageid": "src/assets/carrot.png" },
-	{ "name": "Potato", "price": 40, "imageid": "src/assets/potato.png" },
-	{ "name": "Cabbage", "price": 40, "imageid": "src/assets/cabbage.png" },
-	{ "name": "Pumpkin", "price": 40, "imageid": "src/assets/pumpkin.png" },
-	{ "name": "ChiliPepper", "price": 40, "imageid": "src/assets/chili-pepper.png" },
-	{ "name": "Olive Oil", "price": 48, "imageid": "src/assets/olive-oil.png" },
-	{ "name": "Tomato", "price": 43, "imageid": "src/assets/tomato.png" },
-	{ "name": "PeaNut Butter", "price": 46, "imageid": "src/assets/peanut-butter.png" },
-	{ "name": "Spinach", "price": 50, "imageid": "src/assets/spinach.png" },
-	{ "name": "Tea", "price": 46, "imageid": "src/assets/tea.png" },
-	{ "name": "Pasta", "price": 50, "imageid": "src/assets/pasta.png" },
-	{ "name": "Oil", "price": 50, "imageid": "src/assets/oil.png" },
-	{ "name": "Berberea", "price": 50, "imageid": "src/assets/berberea.png" },
-	{ "name": "Rice", "price": 50, "imageid": "src/assets/rice.png" },
-	{ "name": "Sugar", "price": 50, "imageid": "src/assets/sugar.png" },
-	{ "name": "Coffee", "price": 50, "imageid": "src/assets/coffee.png" },
-	{ "name": "Bread", "price": 50, "imageid": "src/assets/bread.png" },
-	{ "name": "Cucumber", "price": 50, "imageid": "src/assets/Cucumber.png" },
-	{ "name": "Pasta", "price": 50, "imageid": "src/assets/orange.png" },
-	{ "name": "Mango", "price": 50, "imageid": "src/assets/mango.png" },
-	{ "name": "Avocado", "price": 50, "imageid": "src/assets/avocado.png" },
+	{ "name": "Onion", "price": 30, "size":"kg", "imageid": "src/assets/onion.png" },
+	{ "name": "Carrot", "price": 35, "size":"kg", "imageid": "src/assets/carrot.png" },
+	{ "name": "Potato", "price": 40, "size":"kg", "imageid": "src/assets/potato.png" },
+	{ "name": "Cabbage", "price": 40, "size":"kg", "imageid": "src/assets/cabbage.png" },
+	{ "name": "Pumpkin", "price": 40, "size":"kg", "imageid": "src/assets/pumpkin.png" },
+	{ "name": "ChiliPepper", "price": 40, "size":"kg", "imageid": "src/assets/chili-pepper.png" },
+	{ "name": "Olive Oil", "price": 48, "size":"lt", "imageid": "src/assets/olive-oil.png" },
+	{ "name": "Tomato", "price": 43, "size":"kg", "imageid": "src/assets/tomato.png" },
+	{ "name": "PeaNut Butter", "price": 46, "size":"piece", "imageid": "src/assets/peanut-butter.png" },
+	{ "name": "Spinach", "price": 50, "size":"kg", "imageid": "src/assets/spinach.png" },
+	{ "name": "Tea", "price": 46, "size":"piece", "imageid": "src/assets/tea.png" },
+	{ "name": "Oil", "price": 50, "size":"lt", "imageid": "src/assets/oil.png" },
+	{ "name": "Berberea", "price": 50, "size":"kg", "imageid": "src/assets/berberea.png" },
+	{ "name": "Rice", "price": 50, "size":"kg", "imageid": "src/assets/rice.png" },
+	{ "name": "Sugar", "price": 50, "size":"kg", "imageid": "src/assets/sugar.png" },
+	{ "name": "Coffee", "price": 50, "size":"kg", "imageid": "src/assets/coffee.png" },
+	{ "name": "Bread", "price": 50, "size":"piece", "imageid": "src/assets/bread.png" },
+	{ "name": "Cucumber", "price": 50, "size":"kg", "imageid": "src/assets/Cucumber.png" },
+	{ "name": "Pasta", "price": 50, "size":"piece", "imageid": "src/assets/orange.png" },
+	{ "name": "Mango", "price": 50, "size":"kg", "imageid": "src/assets/mango.png" },
+	{ "name": "Avocado", "price": 50, "size":"kg", "imageid": "src/assets/avocado.png" },
 ];
 export default function App() {
 	const [calIn, setCalIn] = useState([]);
 	const [final, setFinal] = useState("");
 	const [result, setresult] = useState(0);
 	const [dataget, setdataget] = useState(data);
+	const [datatype, setdatatype] = useState("grocery")
+	const [itemSize, setItemSize] = useState({});
+	const [timeline, setTimeSize] = useState("");
+	const [month, setMonth] = useState(0);
+
 
 	function updatein(name, price) {
 		setCalIn((prevCalin) => {
 			const newCalIn = [...prevCalin];
 			function containobj(array, obj) {
 				for (let line of array) {
-					if (line[name] === obj.name) {
+					if (line.name == obj.name && line.price == obj.price) {
 						return (0);
 					}
 				}
@@ -47,6 +51,7 @@ export default function App() {
 
 			if (containobj(newCalIn, {name: name, price: price})) {
 				newCalIn.push({name: name, price: price});
+				
 			}
 			let newFinal = "";
 			for (let val of newCalIn) {
@@ -91,13 +96,28 @@ export default function App() {
 	function calculate() {
 		let relt = 0;
 		for (let line of calIn) {
-			relt += line.price;
+			if (itemSize[line.name] !== undefined) {
+				relt += (itemSize[line.name] * line.price);
+			}
+			else {
+				relt += line.price;
+			}
+			if (month !== 0) {
+				if (timeline == "yearly")  {
+					relt *= 12;
+				} else {
+					relt *= month;
+				}
+				console.log("value of month:", month);
+			}
 		}
+
 		setresult(relt);
 	}
 
 	async function fetcher(type) {
 		const url = `http://127.0.0.1:5000/api/cal/${type}`;
+		setdatatype(type);
 		
 		try {
             const response = await fetch(url);
@@ -108,6 +128,43 @@ export default function App() {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
+	}
+
+	function HandleInput({typ, name}) {
+
+		const handler = (event) => {
+			setItemSize((prevItemSize) => ({...prevItemSize, [name]: event.target.value}));
+		};
+		if (itemSize[name] > 1) {
+			let newFinal = "";
+			for (let val of calIn) {
+				if (newFinal !== "") {
+					newFinal += " + ";
+				}
+				if (itemSize[val.name] > 1) {
+					newFinal += `(${val.name}: \$${val.price} * ${itemSize[val.name]} ${typ})`;
+				} else {
+					newFinal += `(${val.name}: \$${val.price})`;
+				}
+			}
+			setFinal(newFinal);
+		}
+		if (typ === "kg" || typ === "lt") {
+
+			return (
+				<>
+				<input className='sizeInput' type='number'  step='0.5' min='0' value={itemSize[name] || "1"}  onChange={(event)=> (setItemSize((prevItemSize) => ({...prevItemSize, [name]: event.target.value})))}></input>
+				<span> {typ}</span>
+				</>
+			);
+		} else if (typ === "piece") {
+			return (
+				<>
+				<input className='sizeInput' type='number' min='1' value={itemSize[name] || "1"}  onChange={handler}></input>
+				<span> {typ}</span>
+				</>
+			);
+		}
 	}
 
 	return (
@@ -123,24 +180,28 @@ export default function App() {
 							<img className='logoIcon' src='src/assets/cart.png' alt='Cart' />
 						</div>
 					</div>
-					<Calcbar final = {final} clear = {clear} del={del} calculate={calculate}/>
+					<Calcbar final = {final} clear = {clear} del={del} calculate={calculate} timeline={timeline} setTimeSize={setTimeSize}  month={month}setMonth={setMonth}/>
 					<div className='popup' style={{ display: result === 0 ? 'none' : 'block' }}>
 						<h2>Result:${result}</h2>
 					</div>
-					<ItemSec updatein = {updatein} dataget = {dataget} />
+					<ItemSec updatein = {updatein} dataget = {dataget}  datatype = {datatype} HandleInput = {HandleInput}/>
 				</div>
 			</div>
 		</>
 	);
 }
 
-function ItemSec({ updatein, dataget }) {
-	return (
-		<div className='sec'>
+function ItemSec({ updatein, dataget, HandleInput, datatype }) {
+
+	function ForGrocery({ dataget, HandleInput, updatein }) {
+	
+		return (
+			<>
 			{dataget.map((items, i) => (
 				<div className="items" key={i} onClick={() => {
 					updatein(items.name, items.price);
 					}}>
+					<div className='icons'>
 					<div className='images'>
 						<img className='itemImage' src={items.imageid} alt={items.name}/>
 					</div>
@@ -148,18 +209,78 @@ function ItemSec({ updatein, dataget }) {
 						<h2 className="item_name">{items.name}</h2>
 						<h2 className="price">${items.price}</h2>
 					</div>
+					</div>
+					<div className='items_input'>
+						<HandleInput typ={items.size} name={items.name}/>
+					</div>
 				</div>
 			))}
+			</>
+		)
+	}
+
+	function ForOther({ dataget, datatype }) {
+		const arrangment = {justifyContent : 'flex-start'};
+		/* if (datatype === "") {
+		} */
+		return (
+			<>
+			{dataget.map((items, i) => (
+				<div className="items" key={i} onClick={() => {
+					updatein(items.name, items.price);
+					}} style={arrangment}>
+					<div className='icons'>
+					<div className='images'>
+						<img className='itemImage' src={items.imageid} alt={items.name}/>
+					</div>
+					<div className="description">
+						<h4 className="item_name">{items.name}</h4>
+						<h4 className="item_name">{items.size}</h4>
+						<h4 className="item_name">{items.type}</h4>
+						<h2 className="price"> ${items.price}</h2>
+					</div>
+					</div>
+				</div>
+			))}
+			</>
+		)
+	}
+
+	return (
+		<div className='sec'>
+			{datatype == "grocery" ? <ForGrocery dataget={dataget} updatein={updatein} HandleInput={HandleInput}/> : <ForOther dataget={dataget} updatein={updatein} datatype={datatype}/>}
 		</div>
-	);
+	)
 }
 
-function Calcbar({ final, clear, del, calculate }) {
+
+function Calcbar({ final, clear, del, calculate, timeline,	setTimeSize, month, setMonth }) {
+	const handleTime = (event) => {
+		setTimeSize(event.target.value);
+	}
+	function TimeLenght() {
+		const handleMonth = (event) => {
+			if (timeline == "monthly") {
+				setMonth(event.target.value);
+			}
+		}
+		if (timeline == "monthly") {
+			return (
+				<div className='numMonth'>
+					<input type="number" min="1" max="11" value={month} onChange={handleMonth}/>
+				</div>
+			);
+		}
+	}
+
 	return (
 		<section className='top'>
 			<div className="clcbar">
 				<div className='monthYear'>
-					<select className='monthly'>
+					<select className='monthly' onChange={handleTime}>
+						<option value="">
+							Time
+						</option>
 						<option value="monthly">
 							Monthly
 						</option>
@@ -168,6 +289,7 @@ function Calcbar({ final, clear, del, calculate }) {
 						</option>
 					</select>	
 				</div>
+				<TimeLenght/>
 				<div className='inputval'>
 					{final}
 				</div>
@@ -190,7 +312,9 @@ function Calcbar({ final, clear, del, calculate }) {
 function LeftBar({fetcher}) {
 	return (
 		<>
-			<div className='leftmenu'>
+			<div className='leftmenu' onClick={() => {
+				/*  */
+			}}>
 				<img className='leftmenuIcon' src='src/assets/leftMenu.png' alt='ICON' />
 			</div>
 			<div className='grocery' onClick={() => {

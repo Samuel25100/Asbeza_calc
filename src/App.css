@@ -55,7 +55,7 @@
   height: 45px;
   border: 3px gray solid;
   border-radius: 3px;
-  margin-left: 45px;
+  margin-left: 0px;
   display: flex;
   flex-direction: row;
 }
@@ -120,6 +120,17 @@
   display: none;
 }
 
+.numMonth {
+  height: 97%;
+  width: 13%;
+}
+
+.numMonth input {
+  font-size: 24px;
+  height: 94%;
+  width: 84%;
+}
+
 .inputval {
   border: 2px red solid;
   width: 100%;
@@ -143,16 +154,23 @@ div.body {
 div.items {
   margin: 10px;
   border: 2px solid;
-  width: 75px;
-  height: 75px;
+  width: 89px;
+  height: 106px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   background-color: rgb(235, 235, 235);
   border-radius: 5px;
 }
+.sizeInput {
+  width: 40%;
+}
+.icons {
+  height: 100%;
+  display: contents;
+}
 div.description {
-  display: flex;
+  display: inline-block;
   margin: 0%;
   align-items: center;
   justify-content: center;
@@ -160,13 +178,15 @@ div.description {
 
 .item_name {
   margin: 0%;
-  font-size: 10px;
+  width: 100%;
+  font-size: 13px;
   margin-left: 5px;
   margin-right: 4px;  
 }
 .price {
   margin: 0;
-  font-size: 10px;
+  margin-left: 5px;
+  font-size: 13px;
 }
 
 .items .images {
@@ -182,12 +202,18 @@ div.description {
 /*Left Bar CSS*/
 
 .leftBar {
-  width: 9%;
-  border-right: 2px solid;
-  margin: 0%;  
+  width: 75px;
+  height: 650px;
+  border: 2px solid;
+  margin: 0%;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  margin-left: 2px;
+  border-radius: 5px;  
   background-color: rgb(246, 246, 246);
   display: flex;
   flex-direction: column;
+  gap: 50px;
   align-items: center;
   justify-content: space-around;
   padding-right: 1px;
@@ -255,8 +281,8 @@ div.description {
 }
 
 .tools .toolIcon {
-  width: 53px;
-  height: 53px;
+  width: 55px;
+  height: 55px;
 }
 
 .one{
@@ -264,4 +290,5 @@ div.description {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
