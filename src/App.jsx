@@ -185,6 +185,9 @@ Let AsbezaCalc be your trusted companion in making informed financial decisions 
 					<button className='getSt' onClick={() => (
 						setLanding(false)
 						)}>Get Started</button>
+					<button className='getSt' onClick={() => {
+						window.open('https://github.com/Samuel25100/Asbeza_calc', '_blank');
+					}}>About</button>
 				</div>
 				
 			</div>
