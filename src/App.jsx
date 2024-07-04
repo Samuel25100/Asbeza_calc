@@ -198,7 +198,7 @@ Let AsbezaCalc be your trusted companion in making informed financial decisions 
 					</div>
 					<div className="one">
 						<div className='logo' onClick={() => (setLanding(true))}>
-							<h1>Asbeza</h1>
+							<h1>AsbezaCalc</h1>
 							<div className='logoIcon'>
 								<img className='logoIcon' src='src/assets/cart.png' alt='Cart' />
 							</div>
