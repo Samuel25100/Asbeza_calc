@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import landingPagePNG from "/assets/LandingPage/TopLandingPage.png"
 import './App.css'
 import './more.css'
 import './landingPg.css'
@@ -117,6 +118,7 @@ export default function App() {
 		setresult(relt);
 	}
 
+
 	async function fetcher(type) {
 		const url = `http://100.25.157.103/api/cal/${type}`;
 		setdatatype(type);
@@ -125,6 +127,7 @@ export default function App() {
             const response = await fetch(url);
 			if (response.ok) {
 				const data = await response.json();
+				console.log(data);
             	setdataget(data);
 			}
         } catch (error) {
@@ -172,7 +175,7 @@ export default function App() {
 		return (
 			<div className='LandingBody'>
 				<div className='Image'>
-					<img className='topLanding' src='src/assets/LandingPage/TopLandingPage.png' alt='Top-Landing-Page'/>
+					<img className='topLanding' src={landingPagePNG} alt='Top-Landing-Page'/>
 				</div>
 				<div className='describe'>
 					<h1 className='topFont'>AsbezaCalc</h1>
