@@ -118,7 +118,7 @@ export default function App() {
 	}
 
 	async function fetcher(type) {
-		const url = `http://127.0.0.1:5000/api/cal/${type}`;
+		const url = `http://100.25.157.103/api/cal/${type}`;
 		setdatatype(type);
 		
 		try {
