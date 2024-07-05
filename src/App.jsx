@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
 import landingPagePNG from "./assets/LandingPage/TopLandingPage.png"
+import leftMenuPNG from "./assets/leftMenu.png"
+import groceryPNG from "./assets/grocery.png"
+import housePNG from "./assets/house.png"
+import vehiclePNG from "./assets/vehicle.png"
+import hotelPNG from "./assets/hotel.png"
+import toolsPNG from "./assets/tools.png"
 import './App.css'
 import './more.css'
 import './landingPg.css'
 //import add from './click.jsx'
 
 const data = [
-	{ "name": "Onion", "price": 30, "size":"kg", "imageid": "src/assets/onion.png" },
+	{ "name": "Onion", "price": 30, "size":"kg", "imageid": "./assets/onion.png" },
 	{ "name": "Carrot", "price": 35, "size":"kg", "imageid": "src/assets/carrot.png" },
 	{ "name": "Potato", "price": 40, "size":"kg", "imageid": "src/assets/potato.png" },
 	{ "name": "Cabbage", "price": 40, "size":"kg", "imageid": "src/assets/cabbage.png" },
@@ -345,35 +351,35 @@ function LeftBar({fetcher}) {
 			<div className='leftmenu' onClick={() => {
 				/*  */
 			}}>
-				<img className='leftmenuIcon' src='src/assets/leftMenu.png' alt='ICON' />
+				<img className='leftmenuIcon' src={leftMenuPNG} alt='ICON' />
 			</div>
 			<div className='grocery' onClick={() => {
 				fetcher('grocery');
 			}}>
-				<img className='groceryIcon' src='src/assets/grocery.png' alt='ICON' />
+				<img className='groceryIcon' src={groceryPNG} alt='ICON' />
 
 			</div>
 			<div className='house' onClick={() => {
 				fetcher('houses')
 			}}>
-				<img className='houseIcon' src='src/assets/house.png' alt='ICON' />
+				<img className='houseIcon' src={housePNG} alt='ICON' />
 
 			</div>
 			<div className='vehicle' onClick={() => {
 				fetcher('vehicles')
 			}}>
-				<img className='vehicleIcon' src='src/assets/vehicle.png' alt='ICON' />
+				<img className='vehicleIcon' src={vehiclePNG} alt='ICON' />
 			</div>
 			<div className='hotel' onClick={() => {
 				fetcher('hotels')
 			}}>
-				<img className='hotelIcon' src='src/assets/hotel.png' alt='ICON' />
+				<img className='hotelIcon' src={hotelPNG} alt='ICON' />
 
 			</div>
 			<div className='tools' onClick={() => {
 				fetcher('tools')
 			}}>
-				<img className='toolIcon' src='src/assets/tools.png' alt='ICON' />
+				<img className='toolIcon' src={toolsPNG} alt='ICON' />
 
 			</div>
 		</>
