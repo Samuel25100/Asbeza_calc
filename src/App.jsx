@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import landingPagePNG from "/assets/LandingPage/TopLandingPage.png"
+import landingPagePNG from "./assets/LandingPage/TopLandingPage.png"
 import './App.css'
 import './more.css'
 import './landingPg.css'
