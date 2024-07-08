@@ -1,4 +1,5 @@
-
+#!/usr/bin/python3
+"""Api for AsbezaCalc, it will load data from file1.json return it based on request"""
 from flask import Flask, jsonify
 from flask_cors import CORS
 import os
@@ -6,10 +7,10 @@ import json
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/cal/*":{"origins":"*", "methods":["GET"]}})
+file_pth = 'database/file1.json'
 
 @app.route('/api/cal/grocery', strict_slashes=False)
 def fetch_grocery():
-    file_pth = 'database/file.json'
     with open(file_pth, 'r') as file:
         f = json.load(file)
         for i in range(len(f)): 
@@ -19,7 +20,6 @@ def fetch_grocery():
 
 @app.route('/api/cal/houses', strict_slashes=False)
 def fetch_houses():
-    file_pth = 'database/file.json'
     with open(file_pth, 'r') as file:
         f = json.load(file)
         for i in range(len(f)):
@@ -29,7 +29,6 @@ def fetch_houses():
 
 @app.route('/api/cal/vehicles', strict_slashes=False)
 def fetch_vehicles():
-    file_pth = 'database/file.json'
     with open(file_pth, 'r') as file:
         f = json.load(file)
         for i in range(len(f)):
@@ -39,7 +38,6 @@ def fetch_vehicles():
 
 @app.route('/api/cal/hotels', strict_slashes=False)
 def fetch_hotels():
-    file_pth = 'database/file.json'
     with open(file_pth, 'r') as file:
         f = json.load(file)
         for i in range(len(f)):
@@ -49,7 +47,6 @@ def fetch_hotels():
 
 @app.route('/api/cal/tools', strict_slashes=False)
 def fetch_tools():
-    file_pth = 'database/file.json'
     with open(file_pth, 'r') as file:
         f = json.load(file)
         for i in range(len(f)):
