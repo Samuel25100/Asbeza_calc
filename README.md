@@ -1,5 +1,6 @@
 # AsbezaCalc
 ##Introduction
+
 AsbezaCalc is a simple web app that use to calculate common expenses or cost to live or stay in Ethiopia,Addis-Ababa. it is designed specifically to help tourist or they work remote job and want to settle in Addis Ababa, on planning how much buget they could need based on thier espenses per months or a year. 
 AsbezaCalc will have already studied and collected data of common goods and services prices within the web app so the client or user only need to know what and how much did they need per a certain duration then AsbezaCalc will help them on how much budget will they need based on thier needs, so they don't have to research many website just to get the prices of each things they may need for thier staying in Addis-Ababa.
 
@@ -7,13 +8,16 @@ AsbezaCalc will solve problems of tourists struggles to find upto-date data of p
 very overwhelming for many so AsbezaCalc will make that road smooth and make travelling to Addis Ababa is one of your great experience
 
 ##Development
+
 ###Frontend:
     React + Vite enviroment.
+
 ###Backend:
     Vercel - for hosting
     api - using python, flask, and Gunicorn with nginx
 
 ##Files heirarchy
+
 Asbeza_calc
     |->database - all backend except hosting are here
         |->AsbezaCalc.sql - is the sql data dumping file, running this file create
