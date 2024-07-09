@@ -6,6 +6,7 @@ import housePNG from "./assets/house.png"
 import vehiclePNG from "./assets/vehicle.png"
 import hotelPNG from "./assets/hotel.png"
 import toolsPNG from "./assets/tools.png"
+import cartPNG from "./assets/cart.png"
 import './App.css'
 import './more.css'
 import './landingPg.css'
@@ -211,7 +212,7 @@ Let AsbezaCalc be your trusted companion in making informed financial decisions 
 						<div className='logo' onClick={() => (setLanding(true))}>
 							<h1>AsbezaCalc</h1>
 							<div className='logoIcon'>
-								<img className='logoIcon' src='src/assets/cart.png' alt='Cart' />
+								<img className='logoIcon' src={cartPNG} alt='Cart' />
 							</div>
 						</div>
 						<Calcbar final = {final} clear = {clear} del={del} calculate={calculate} timeline={timeline} setTimeSize={setTimeSize}  month={month}setMonth={setMonth}/>
