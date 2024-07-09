@@ -13,7 +13,7 @@ very overwhelming for many so AsbezaCalc will make that road smooth and make tra
     React + Vite enviroment.
 
 ###Backend:
-    Vercel - for hosting
+    Vercel - for hosting, page link "https://asbeza-calc.vercel.app"
     api - using python, flask, and Gunicorn with nginx
 
 ##Files heirarchy
