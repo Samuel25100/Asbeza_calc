@@ -22,21 +22,35 @@ Asbeza_calc
     |->database - all backend except hosting are here
         |->AsbezaCalc.sql - is the sql data dumping file, running this file create
             mysql database.
-        |->AsbezaCalc_API.py - is flask api that fetch data from file.json and
+
+            |->AsbezaCalc_API.py - is flask api that fetch data from file.json and
             return it based on http request 
+
         |->file.json - file storage of all data (name, price ...etc)
+        
         |->filestorage.py - is python file use to fetch data from mysql database
             and store it in file named 'file.json'
+    
     |->dist - is the build destination of react 
+    
     |->public
+    
     |->src - is the main build enviroment
+        
         |->App.jsk - here is where all AsbezaCalc component located at
+        
         |->main.jsx - is the main file who call root component
+        
         |->index.css - for body and root element
+        
         |->App.css - main css file
+        
         |->landingPg.css - css of landing page 
+        
         |->more.css - css of asbezacalc button effects (hover, onclick ...etc)
+    
     |->README.md
+    
     |->index.html
 
 
