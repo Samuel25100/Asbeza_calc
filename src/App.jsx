@@ -126,7 +126,7 @@ export default function App() {
 
 
 	async function fetcher(type) {
-		const url = `http://100.25.157.103/api/cal/${type}`;
+		const url = `https://www.techmaker.tech/api/cal/${type}`;
 		setdatatype(type);
 		
 		try {
