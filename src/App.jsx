@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
 import landingPagePNG from "./assets/LandingPage/TopLandingPage.png"
-import leftMenuPNG from "./assets/leftMenu.png"
-import groceryPNG from "./assets/grocery.png"
-import housePNG from "./assets/house.png"
-import vehiclePNG from "./assets/vehicle.png"
-import hotelPNG from "./assets/hotel.png"
-import toolsPNG from "./assets/tools.png"
-import cartPNG from "./assets/cart.png"
 import './App.css'
 import './more.css'
 import './landingPg.css'
-//import add from './click.jsx'
+import cartPNG from "./assets/cart.png"
+
+import {Calcbar} from './CalcUpdate.jsx'
+import ItemSec from './List_of_Items.jsx'
+import LeftBar from './LeftMenus.jsx';
 
 const data = [
-	{ "name": "Onion", "price": 30, "size":"kg", "imageid": "./assets/onion.png" },
+	{ "name": "Onion", "price": 30, "size":"kg", "imageid": "src/assets/onion.png" },
 	{ "name": "Carrot", "price": 35, "size":"kg", "imageid": "src/assets/carrot.png" },
 	{ "name": "Potato", "price": 40, "size":"kg", "imageid": "src/assets/potato.png" },
 	{ "name": "Cabbage", "price": 40, "size":"kg", "imageid": "src/assets/cabbage.png" },
@@ -47,136 +44,7 @@ export default function App() {
 	const [landingPage, setLanding] = useState(true);
 
 
-	function updatein(name, price) {
-		setCalIn((prevCalin) => {
-			const newCalIn = [...prevCalin];
-			function containobj(array, obj) {
-				for (let line of array) {
-					if (line.name == obj.name && line.price == obj.price) {
-						return (0);
-					}
-				}
-				return (1);
-			}
-
-			if (containobj(newCalIn, {name: name, price: price})) {
-				newCalIn.push({name: name, price: price});
-				
-			}
-			let newFinal = "";
-			for (let val of newCalIn) {
-				if (newFinal !== "") {
-					newFinal += " + ";
-				}
-				newFinal += `(${val.name}: \$${val.price})`;
-			}
-			setFinal(newFinal);
-			return (newCalIn);
-		})
-	}
-
-	function clear() {
-		setCalIn([]);
-		setFinal("");
-		setresult(0);
-	}
-
-	function del() {
-		if (calIn.length !== 0 && final.length !== 0) {
-			setCalIn((prevVal) => {
-				if (prevVal.length !== 0) {
-					if (prevVal.length === 1) {
-						clear();
-					}
-					prevVal.pop();
-					return (prevVal);
-				}
-			})
-			setFinal((perfinal) => {
-				if (perfinal.length !== 0) {
-					if (perfinal.length <= 20) {
-						clear();
-					}
-					return (perfinal.replace(/\s\+\s\([^)]+\)$/, ""));
-				}
-			})
-		}
-	}
-
-	function calculate() {
-		let relt = 0;
-		for (let line of calIn) {
-			if (itemSize[line.name] !== undefined) {
-				relt += (itemSize[line.name] * line.price);
-			}
-			else {
-				relt += line.price;
-			}
-			if (month !== 0) {
-				if (timeline == "yearly")  {
-					relt *= 12;
-				} else {
-					relt *= month;
-				}
-				console.log("value of month:", month);
-			}
-		}
-
-		setresult(relt);
-	}
-
-
-	async function fetcher(type) {
-		const url = `https://www.techmaker.tech/api/cal/${type}`;
-		setdatatype(type);
-		
-		try {
-            const response = await fetch(url);
-			if (response.ok) {
-				const data = await response.json();
-            	setdataget(data);
-			}
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-	}
-
-	function HandleInput({typ, name}) {
-
-		const handler = (event) => {
-			setItemSize((prevItemSize) => ({...prevItemSize, [name]: event.target.value}));
-		};
-		if (itemSize[name] > 1) {
-			let newFinal = "";
-			for (let val of calIn) {
-				if (newFinal !== "") {
-					newFinal += " + ";
-				}
-				if (itemSize[val.name] > 1) {
-					newFinal += `(${val.name}: \$${val.price} * ${itemSize[val.name]} ${typ})`;
-				} else {
-					newFinal += `(${val.name}: \$${val.price})`;
-				}
-			}
-			setFinal(newFinal);
-		}
-		if (typ === "kg" || typ === "lt") {
-
-			return (
-				<>
-				<input className='sizeInput' type='number'  step='0.5' min='0' value={itemSize[name] || "1"}  onChange={(event)=> (setItemSize((prevItemSize) => ({...prevItemSize, [name]: event.target.value})))}></input>
-				<span> {typ}</span>
-				</>
-			);
-		} else if (typ === "piece") {
-			return (
-				<>
-				<input className='sizeInput' type='number' min='1' value={itemSize[name] || "1"}  onChange={handler}></input>
-				<span> {typ}</span>
-				</>
-			);
-		}
-	}
+	
 	if (landingPage) {
 		return (
 			<div className='LandingBody'>
@@ -206,7 +74,7 @@ Let AsbezaCalc be your trusted companion in making informed financial decisions 
 			<>
 				<div className='body'>
 					<div className='leftBar'>
-						<LeftBar fetcher={fetcher}/>
+						<LeftBar setdatatype={setdatatype} setdataget={setdataget}/>
 					</div>
 					<div className="one">
 						<div className='logo' onClick={() => (setLanding(true))}>
@@ -215,173 +83,14 @@ Let AsbezaCalc be your trusted companion in making informed financial decisions 
 								<img className='logoIcon' src={cartPNG} alt='Cart' />
 							</div>
 						</div>
-						<Calcbar final = {final} clear = {clear} del={del} calculate={calculate} timeline={timeline} setTimeSize={setTimeSize}  month={month}setMonth={setMonth}/>
+						<Calcbar timeline={timeline} itemSize={itemSize} setTimeSize={setTimeSize} month={month} setMonth={setMonth} final={final} setFinal={setFinal} setCalIn={setCalIn} calIn={calIn} setresult={setresult}/>
 						<div className='popup' style={{ display: result === 0 ? 'none' : 'block' }}>
 							<h2>Result:${result}</h2>
 						</div>
-						<ItemSec updatein = {updatein} dataget = {dataget}  datatype = {datatype} HandleInput = {HandleInput}/>
+						<ItemSec dataget={dataget}  datatype={datatype} itemSize={itemSize} setItemSize={setItemSize} setCalIn={setCalIn} setFinal={setFinal} calIn={calIn}/>
 					</div>
 				</div>
 			</>
 		);
 	}
-}
-
-function ItemSec({ updatein, dataget, HandleInput, datatype }) {
-
-	function ForGrocery({ dataget, HandleInput, updatein }) {
-	
-		return (
-			<>
-			{dataget.map((items, i) => (
-				<div className="items" key={i} onClick={() => {
-					updatein(items.name, items.price);
-					}}>
-					<div className='icons'>
-					<div className='images'>
-						<img className='itemImage' src={items.imageid} alt={items.name}/>
-					</div>
-					<div className="description">
-						<h2 className="item_name">{items.name}</h2>
-						<h2 className="price">${items.price}</h2>
-					</div>
-					</div>
-					<div className='items_input'>
-						<HandleInput typ={items.size} name={items.name}/>
-					</div>
-				</div>
-			))}
-			</>
-		)
-	}
-
-	function ForOther({ dataget, datatype }) {
-		const arrangment = {justifyContent : 'flex-start'};
-		/* if (datatype === "") {
-		} */
-		return (
-			<>
-			{dataget.map((items, i) => (
-				<div className="items" key={i} onClick={() => {
-					updatein(items.name, items.price);
-					}} style={arrangment}>
-					<div className='icons'>
-					<div className='images'>
-						<img className='itemImage' src={items.imageid} alt={items.name}/>
-					</div>
-					<div className="description">
-						<h4 className="item_name">{items.name}</h4>
-						<h4 className="item_name">{items.size}</h4>
-						<h4 className="item_name">{items.type}</h4>
-						<h2 className="price"> ${items.price}</h2>
-					</div>
-					</div>
-				</div>
-			))}
-			</>
-		)
-	}
-
-	return (
-		<div className='sec'>
-			{datatype == "grocery" ? <ForGrocery dataget={dataget} updatein={updatein} HandleInput={HandleInput}/> : <ForOther dataget={dataget} updatein={updatein} datatype={datatype}/>}
-		</div>
-	)
-}
-
-
-function Calcbar({ final, clear, del, calculate, timeline,	setTimeSize, month, setMonth }) {
-	const handleTime = (event) => {
-		setTimeSize(event.target.value);
-	}
-	function TimeLenght() {
-		const handleMonth = (event) => {
-			if (timeline == "monthly") {
-				setMonth(event.target.value);
-			}
-		}
-		if (timeline == "monthly") {
-			return (
-				<div className='numMonth'>
-					<input type="number" min="1" max="11" value={month} onChange={handleMonth}/>
-				</div>
-			);
-		}
-	}
-
-	return (
-		<section className='top'>
-			<div className="clcbar">
-				<div className='monthYear'>
-					<select className='monthly' onChange={handleTime}>
-						<option value="">
-							Time
-						</option>
-						<option value="monthly">
-							Monthly
-						</option>
-						<option value="yearly">
-							Yearly
-						</option>
-					</select>	
-				</div>
-				<TimeLenght/>
-				<div className='inputval'>
-					{final}
-				</div>
-			</div>
-			<div className='calButton'>
-				<button className='delete' onClick={() => {
-					del();
-				}}>Delete</button>
-				<button className='clear' onClick={() => {
-					clear();
-				}}>Clear</button>
-				<button className='cal' onClick={() => {
-					calculate();
-				}}>Calculate</button>
-			</div>
-		</section>
-	)
-}
-
-function LeftBar({fetcher}) {
-	return (
-		<>
-			<div className='leftmenu' onClick={() => {
-				/*  */
-			}}>
-				<img className='leftmenuIcon' src={leftMenuPNG} alt='ICON' />
-			</div>
-			<div className='grocery' onClick={() => {
-				fetcher('grocery');
-			}}>
-				<img className='groceryIcon' src={groceryPNG} alt='ICON' />
-
-			</div>
-			<div className='house' onClick={() => {
-				fetcher('houses')
-			}}>
-				<img className='houseIcon' src={housePNG} alt='ICON' />
-
-			</div>
-			<div className='vehicle' onClick={() => {
-				fetcher('vehicles')
-			}}>
-				<img className='vehicleIcon' src={vehiclePNG} alt='ICON' />
-			</div>
-			<div className='hotel' onClick={() => {
-				fetcher('hotels')
-			}}>
-				<img className='hotelIcon' src={hotelPNG} alt='ICON' />
-
-			</div>
-			<div className='tools' onClick={() => {
-				fetcher('tools')
-			}}>
-				<img className='toolIcon' src={toolsPNG} alt='ICON' />
-
-			</div>
-		</>
-	)
 }
