@@ -1,4 +1,7 @@
-/* Left Bar handler functions and components*/
+/*
+LeftBar -  is the left menu handler component to make http request based on each button and its function is:
+    fetcher - make http request to fetch data based on input value 'type' could be (grocery, hotels, tools ...)
+*/
 import leftMenuPNG from "./assets/leftMenu.png"
 import groceryPNG from "./assets/grocery.png"
 import housePNG from "./assets/house.png"

@@ -1,4 +1,11 @@
-/*Calculator bar input values and its output modifier functions*/
+/*
+Calcbar - handle the calculation of the data and delete, clear and calculate button functions.
+it have following functions:
+    clear - clear all user input data, will be called on click of 'Clear' button
+    del - delete one user selected item from display and to be calculated data, will be called on click of 'Delete' button
+    calculate - calculated result from inserted data, will be called on click of 'Calculate' button
+    TimeLenght - handle the number of month inputed by user for time option
+*/
 
 
 
@@ -35,11 +42,8 @@ export function Calcbar({ final, timeline, itemSize, setTimeSize, month, setMont
     function calculate() {
         let relt = 0;
         for (let line of calIn) {
-            console.log(itemSize[line.name]);
             if (itemSize[line.name] !== undefined) {
-                relt += (itemSize[line.name] * line.price);
-                console.log("value of month:", month, "relt:", relt, "calin:", calIn);
-                
+                relt += (itemSize[line.name] * line.price);   
             }
             else {
                 relt += line.price;
@@ -67,7 +71,7 @@ export function Calcbar({ final, timeline, itemSize, setTimeSize, month, setMont
 		if (timeline == "monthly") {
 			return (
 				<div className='numMonth'>
-					<input type="number" min="1" max="11" value={month} onChange={handleMonth}/>
+					<input type="number" id="numInput" min="1" max="11" value={month} onChange={handleMonth}/>
 				</div>
 			);
 		}
@@ -77,7 +81,7 @@ export function Calcbar({ final, timeline, itemSize, setTimeSize, month, setMont
 		<section className='top'>
 			<div className="clcbar">
 				<div className='monthYear'>
-					<select className='monthly' onChange={handleTime}>
+					<select className='monthly' id="time" onChange={handleTime}>
 						<option value="">
 							Time
 						</option>
