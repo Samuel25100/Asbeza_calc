@@ -1,3 +1,9 @@
+/*
+App is the root component of the frontend it have following components
+	LeftBar - handle left bar menus and buttons, is in file './LeftMenus.jsx'
+	Calcbar - handle the calculator logic and its output results, is in file './CalcUpdate.jsx'
+	ItemSec - handle the list of items, is in file './List_of_Items.jsx'
+*/
 import { useEffect, useState } from 'react';
 import landingPagePNG from "./assets/LandingPage/TopLandingPage.png"
 import './App.css'
